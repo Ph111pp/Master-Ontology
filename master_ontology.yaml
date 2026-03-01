@@ -208,7 +208,7 @@ people:
     url: https://restaurieren-vergolden.de
     affiliations:
       - Elevation
-    description: "Freelancer - Gilding/Vergoldung specialist. Works on artworks 5 & 11."
+    description: "Freelancer - Gilding/Vergoldung specialist. Works on artworks 5."
     validationStatus: validated
 
   bjoern_eckerl:
@@ -362,6 +362,8 @@ organizations:
     name: "ARTTRD Fine Art Trading, Consulting & Collecting"
     alternateName: Art Trade
     address:
+         streetAddress: "Klingenteichstrasse 30"
+              postalCode: "69117"
       addressLocality: Heidelberg
       addressCountry: DE
     taxID: DE277593458
@@ -497,6 +499,29 @@ artworks:
 
 ---
 
+
+# =============================================================================
+# WORKFLOWS (LIFECYCLE-REGISTER)
+# Jeder Eintrag: dateCreated, expires, status, dateRetired, description
+# =============================================================================
+workflows:
+  slack_rag_elevation:
+      dateCreated: "2025-03-15"
+          expires: "2026-08-28"
+              status: active
+                  dateRetired: ""
+                      description: "Meeting-Transkripte via Google Drive in Pinecone indexieren, per Slack abfragen."
+
+                      ---
+
+                      # =============================================================================
+                      # GRAVEYARD
+                      # Retired Artefakte. Jeder Eintrag wird automatisch von einer LLM erstellt,
+                      # bevor das Artefakt geloescht wird.
+                      # =============================================================================
+                      graveyard: []
+
+                      ---
 # =============================================================================
 # 5. PATENTS (schema:Patent)
 # =============================================================================
