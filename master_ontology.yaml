@@ -1,0 +1,599 @@
+# =============================================================================
+# MASTER ONTOLOGY
+# Konsolidierte Schema.org/YAML Knowledge Base
+# =============================================================================
+# Erstellt: 2026-02-25, aktualisiert: 2026-02-26
+# Quellen:
+#   - Ph111pp/YAML: Elevation_Entities.yaml, Elevation_Uebergabe.md
+#   - Ph111pp/schema-org-validation: schema-org-klassifikation-FINAL-VALIDIERT.yaml,
+#     MASTER-GESAMTSTRUKTUR-PHILIPP-ERLACH-ELEVATION.yaml (truncated),
+#     erlach-und-erlach-ALLE-drei-lizenznehmer.yaml,
+#     erlach-und-erlach-kontakt-webpraesen.yaml,
+#     holding-struktur-timeline-TODO.yaml,
+#     vier-fuer-texas-hauptkunden-final.yaml
+#   - Ergaenzungen durch Philipp Erlach (Chat, 2026-02-25 & 2026-02-26)
+# Vokabular: Schema.org (strict) + Custom Extensions (nameChange)
+# =============================================================================
+
+---
+
+# =============================================================================
+# 1. PEOPLE (schema:Person)
+# =============================================================================
+
+people:
+
+  philipp_erlach:
+    type: Person
+    name: Philipp Erlach
+    givenName: Philipp
+    familyName: Erlach
+    email: philipp@erlach-erlach.com
+    url:
+      - https://www.philipp-erlach.com
+      - https://www.vier-fuer-texas.com
+      - https://www.erlach-erlach.com
+    address:
+      streetAddress: "Burgholzhaeuser Strasse 2D"
+      postalCode: "61352"
+      addressLocality: Bad Homburg
+      addressRegion: Hessen
+      addressCountry: DE
+      note: Stadtteil Ober-Erlenbach
+    jobTitle:
+      - "Gruender & Geschaeftsfuehrer Vier fuer Texas GmbH & Co. KG"
+      - "Geschaeftsfuehrer Erlach & Erlach GmbH"
+      - "Geschaeftsfuehrer Ka-Ching GmbH"
+      - Creative Lead Elevation
+    worksFor:
+      - Vier fuer Texas GmbH & Co. KG
+      - Erlach & Erlach GmbH
+    roles:
+      - Founder Elevation
+      - Creative Director
+      - "Co-Erfinder Patent WO2013007415 (Pelton-Turbine)"
+    affiliations:
+      - Erlach & Erlach GmbH
+      - Vier fuer Texas GmbH & Co. KG
+      - E&E Office UG
+      - Ka-Ching GmbH
+    knowsAbout:
+      - Schema.org
+      - Strategic Consulting
+      - Brand Strategy
+      - Digital Marketing
+      - Content Marketing
+    education:
+      - institution: Albert-Ludwigs-Universitaet Freiburg
+        field: Germanistik und Philosophie
+      - institution: Universite Paris Nanterre
+        field: Germanistik und Philosophie
+      - institution: Goethe-Universitaet Frankfurt
+        field: Germanistik und Philosophie
+        professors:
+          - Prof. Werner Hamacher
+          - Prof. Axel Honneth
+      - institution: EHESS Paris
+        field: Vorlesungen bei Jacques Derrida
+      - certification: Systemische Organisationsentwicklung
+        provider: Artop/HU Berlin
+    awards:
+      - DPOK 2018 - Winner
+      - "German Design Award 2019 - Winner (Fraport VIP Services)"
+      - "German Brand Award 2019 - Winner (Fraport VIP Services)"
+      - "BCM Award 2018 - 3x Silber (BASF Kampagne)"
+      - ADC Award 2015 - Silber
+      - Red Dot Award 2018
+      - BCP Award 2019 - Silber
+      - "Deutscher Preis fuer Onlinekommunikation - Silber"
+    children:
+      - alma_erlach
+      - maxie_erlach
+    spouse: jill_erlach (ex)
+    parent: josef_erlach
+    validationStatus: validated
+    sameAs: []
+    validationSource: "GitHub + Gmail + Webrecherche + Chat"
+
+  josef_erlach:
+    type: Person
+    name: Josef Erlach
+    givenName: Josef
+    familyName: Erlach
+    description: Vater von Philipp Erlach
+    roles:
+      - "Co-Erfinder Patent WO2013007415 (Pelton-Turbine)"
+      - "5% Eigentuemer Erlach & Erlach GmbH"
+    affiliations:
+      - Erlach & Erlach GmbH
+    children:
+      - philipp_erlach
+    validationStatus: partial
+
+  alma_erlach:
+    type: Person
+    name: Alma Erlach
+    givenName: Alma
+    familyName: Erlach
+    birthDate: "2014-09-14"
+    parent:
+      - philipp_erlach
+      - jill_erlach
+    note: Geteiltes Sorgerecht
+
+  maxie_erlach:
+    type: Person
+    name: Maxie Erlach
+    givenName: Maxie
+    familyName: Erlach
+    birthDate: "2018-03-31"
+    parent:
+      - philipp_erlach
+      - jill_erlach
+    note: Geteiltes Sorgerecht
+
+  jill_erlach:
+    type: Person
+    name: Jill Evelyn Erlach
+    givenName: Jill Evelyn
+    familyName: Erlach
+    birthName: Helwig
+    birthDate: "1980-08-10"
+    address:
+      streetAddress: "Eichenstrasse 1"
+      postalCode: "61352"
+      addressLocality: Bad Homburg
+      addressRegion: Hessen
+      addressCountry: DE
+      note: Stadtteil Ober-Erlenbach
+    children:
+      - alma_erlach
+      - maxie_erlach
+    spouse: philipp_erlach (ex)
+    note: Geteiltes Sorgerecht fuer Alma und Maxie
+
+  oskar_kampik:
+    type: Person
+    name: Oskar Kampik
+    givenName: Oskar
+    familyName: Kampik
+    jobTitle: "Project Manager & Operations (Elevation)"
+    affiliations:
+      - Elevation
+    parent: wilhelm_kampik
+    validationStatus: validated
+
+  agata_gawlik:
+    type: Person
+    name: Agata Gawlik
+    givenName: Agata
+    familyName: Gawlik
+    alternateName: Agi
+    jobTitle: "Creative Director & Graphic Design"
+    worksFor: Vier fuer Texas GmbH & Co. KG
+    affiliations:
+      - Vier fuer Texas GmbH & Co. KG
+      - Elevation
+    validationStatus: validated
+
+  wilhelm_kampik:
+    type: Person
+    name: Wilhelm Kampik
+    givenName: Wilhelm
+    familyName: Kampik
+    jobTitle: Inhaber ARTTRD
+    address:
+      addressLocality: Heidelberg
+      addressCountry: DE
+    children:
+      - oskar_kampik
+    affiliations:
+      - ARTTRD
+    validationStatus: validated
+
+  sabina_schroeter:
+    type: Person
+    name: Sabina Schroeter
+    givenName: Sabina
+    familyName: Schroeter
+    jobTitle: "Restauratorin & Vergolderin"
+    address:
+      streetAddress: "Kopenhagener Str. 43"
+      postalCode: "10437"
+      addressLocality: Berlin
+      addressCountry: DE
+    telephone: "030 / 795 36 96"
+    faxNumber: "030 / 795 36 96"
+    email: info@restaurieren-vergolden.de
+    url: https://restaurieren-vergolden.de
+    affiliations:
+      - Elevation
+    description: "Freelancer - Gilding/Vergoldung specialist. Works on artworks 5 & 11."
+    validationStatus: validated
+
+  bjoern_eckerl:
+    type: Person
+    name: Bjoern Eckerl
+    givenName: Bjoern
+    familyName: Eckerl
+    description: "100% Eigentuemer TCB GmbH"
+    affiliations:
+      - TCB GmbH
+      - Vier fuer Texas GmbH & Co. KG
+    validationStatus: partial
+
+---
+
+# =============================================================================
+# 2. ORGANIZATIONS (schema:Organization)
+# =============================================================================
+
+organizations:
+
+  erlach_erlach_gmbh:
+    type: Organization
+    name: Erlach & Erlach GmbH
+    legalName: Erlach & Erlach GmbH
+    alternateName: "E&E"
+    sameAs: []
+    foundingDate: "2011-11-07"
+    address:
+      streetAddress: "Gustav-Werner-Strasse 7"
+      postalCode: "88214"
+      addressLocality: Ravensburg
+      addressCountry: DE
+    email: philipp@erlach-erlach.com
+    url: https://www.erlach-erlach.com
+    description: "Holding / Patent-Lizenzgesellschaft (Pelton-Turbine)"
+    founder: Philipp Erlach
+    numberOfEmployees: 2
+    employee:
+      - Philipp Erlach
+      - Josef Erlach
+    ownership:
+      - owner: Philipp Erlach
+        ownershipPercentage: "95%"
+      - owner: Josef Erlach
+        ownershipPercentage: "5%"
+    owns:
+      - entity: Vier fuer Texas GmbH & Co. KG
+        ownershipPercentage: "50%"
+      - entity: E&E Office UG
+        ownershipPercentage: "100%"
+      - entity: Ka-Ching GmbH
+        ownershipPercentage: "100%"
+    knowsAbout:
+      - Patent-Lizenzgesellschaft
+      - Pelton-Turbine Lizenzierung
+    validationStatus: validated
+
+  vier_fuer_texas:
+    type: Organization
+    name: Vier fuer Texas GmbH & Co. KG
+    legalName: Vier fuer Texas GmbH & Co. KG
+    alternateName: 4ft
+    sameAs: []
+    foundingDate: "2002"
+    address:
+      streetAddress: "Taunusstrasse 21"
+      postalCode: "60329"
+      addressLocality: Frankfurt am Main
+      addressCountry: DE
+    url: https://www.vier-fuer-texas.com
+    description: Creative Agency
+    founder: Philipp Erlach
+    employee:
+      - Philipp Erlach
+      - Agata Gawlik
+    ownedBy:
+      - owner: Erlach & Erlach GmbH
+        ownershipPercentage: "50%"
+      - owner: TCB GmbH
+        ownershipPercentage: "50%"
+    knowsAbout:
+      - Strategische Beratung
+      - Content Marketing
+      - Corporate Influencer Programme
+      - Social Media Management
+      - "Storytelling & Narratives"
+    clients:
+      - Frankfurter Buchmesse
+      - Suedzucker
+      - BASF
+      - Fraport
+      - Deutsche Bank
+      - Ferrero
+      - Samsung
+      - Hyundai
+      - Merck
+      - Phoenix Contact
+      - Wacker Chemie
+      - Sto
+      - Degussa Bank
+      - Koenig & Bauer
+      - Nestle
+      - Messer Group
+      - Kloeckner & Co
+    validationStatus: validated
+
+  ee_office_ug:
+    type: Organization
+    name: E&E Office UG
+    ownedBy:
+      - owner: Erlach & Erlach GmbH
+        ownershipPercentage: "100%"
+    validationStatus: partial
+
+  ka_ching_gmbh:
+    type: Organization
+    name: Ka-Ching GmbH
+    legalName: Ka-Ching GmbH
+    alternateName: PFT GmbH
+    registeredIn: "AG Frankfurt am Main HRB 101021"
+    address:
+      streetAddress: "Burgholzhaeuser Strasse 2D"
+      postalCode: "61352"
+      addressLocality: Bad Homburg
+      addressCountry: DE
+    description: "Vermoegensverwaltung"
+    ownedBy:
+      - owner: Erlach & Erlach GmbH
+        ownershipPercentage: "100%"
+    nameChange:
+      formerName: PFT GmbH
+      dateRenamed: "2023-11-03"
+      note: "Umfirmierung von PFT GmbH zu Ka-Ching GmbH, eingetragen AG Frankfurt HRB 101021"
+    validationStatus: partial
+
+  tcb_gmbh:
+    type: Organization
+    name: TCB GmbH
+    description: "Holding von Bjoern Eckerl, haelt 50% an Vier fuer Texas"
+    ownership:
+      - owner: Bjoern Eckerl
+        ownershipPercentage: "100%"
+    owns:
+      - entity: Vier fuer Texas GmbH & Co. KG
+        ownershipPercentage: "50%"
+    validationStatus: partial
+
+  arttrd:
+    type: Organization
+    name: "ARTTRD Fine Art Trading, Consulting & Collecting"
+    alternateName: Art Trade
+    address:
+      addressLocality: Heidelberg
+      addressCountry: DE
+    taxID: DE277593458
+    founder: Wilhelm Kampik
+    description: "Externer Rechnungsstellungspartner fuer Elevation"
+    validationStatus: validated
+
+---
+
+# =============================================================================
+# 3. CREATIVE PROJECTS (schema:CreativeWork)
+# =============================================================================
+
+projects:
+
+  elevation:
+    type: Project
+    name: Elevation
+    description: >
+      Oberbegriff fuer Philipp Erlachs persoenliche kreative und
+      unternehmerische Vorhaben: Kunst, Podcast, Buch, Personal Brand,
+      Kommunikation. Kein Unternehmen, sondern ein Projektrahmen.
+      Finanzielle/steuerliche Einbettung in E&E GmbH ist TBD.
+    creator: Philipp Erlach
+    status: Active
+    member:
+      - Philipp Erlach
+      - Oskar Kampik
+      - Agata Gawlik
+      - Sabina Schroeter
+    note: "Finanzielle Einbettung in Unternehmensstruktur noch offen (TBD)"
+
+  art_unscripted:
+    type: PodcastSeries
+    name: Art Unscripted
+    creator: Philipp Erlach
+    isPartOf: Elevation
+    status: Active
+
+  becoming_through_moves:
+    type: Book
+    name: Becoming through Moves
+    creator: Philipp Erlach
+    isPartOf: Elevation
+    status: In Progress
+
+  philipp_erlach_com:
+    type: WebSite
+    name: philipp-erlach.com
+    url: https://philipp-erlach.com
+    creator: Philipp Erlach
+    isPartOf: Elevation
+    status: Active
+
+---
+
+# =============================================================================
+# 4. ARTWORKS (schema:VisualArtwork)
+# =============================================================================
+
+artworks:
+
+  - id: 1
+    type: VisualArtwork
+    name: Tierchenphilosophie
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 2
+    type: VisualArtwork
+    name: Moeglichkeiten
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 3
+    type: VisualArtwork
+    name: Hang-Up
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 4
+    type: VisualArtwork
+    name: Elevation / Nagel
+    creator: Philipp Erlach
+    isPartOf: Elevation
+    description: Namensgebendes Werk
+
+  - id: 5
+    type: VisualArtwork
+    name: Goldenes Schiffchen / Baerbel
+    creator: Philipp Erlach
+    contributor: Sabina Schroeter
+    contributorRole: Gilding / Vergoldung
+    isPartOf: Elevation
+
+  - id: 6
+    type: VisualArtwork
+    name: Guete
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 7
+    type: VisualArtwork
+    name: Chaos
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 8
+    type: VisualArtwork
+    name: Message in a Bottle
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 9
+    type: VisualArtwork
+    name: Die Schnapsidee
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 10
+    type: VisualArtwork
+    name: Die Flagge
+    creator: Philipp Erlach
+    isPartOf: Elevation
+
+  - id: 11
+    type: VisualArtwork
+    name: Die Goldene Kugel
+    creator: Philipp Erlach
+    contributor: Sabina Schroeter
+    contributorRole: Gilding / Vergoldung
+    isPartOf: Elevation
+
+---
+
+# =============================================================================
+# 5. PATENTS (schema:Patent)
+# =============================================================================
+
+patents:
+
+  pelton_turbine_patent:
+    type: Patent
+    name: Pelton-Turbine mit Nadelduese
+    patentNumber: WO2013007415
+    alternatePatentNumber: PCT/EP2012/063069
+    inventor:
+      - Josef Erlach
+      - Philipp Erlach
+    assignee: Erlach & Erlach GmbH
+    datePublished: "2013"
+    licensee:
+      - name: Voith GmbH & Co. KGaA
+        location: Heidenheim, Deutschland
+        status: active
+      - name: Troyer Turbinen GmbH
+        location: "Vipiteno (Sterzing), Suedtirol, Italien"
+        status: active
+      - name: Stellba Hydro GmbH & Co. KG
+        location: Heidenheim/Herbrechtingen, Deutschland
+        status: active
+    sameAs:
+      - https://patents.google.com/patent/WO2013007415
+    validationStatus: validated
+
+---
+
+# =============================================================================
+# 6. TIMELINE (schema:Event)
+# =============================================================================
+
+timeline:
+
+  - date: "2002"
+    type: Event
+    name: "Gruendung Vier fuer Texas"
+    description: "Gruender: Philipp Erlach, Frankfurt am Main"
+    validationStatus: validated
+
+  - date: "2011-11-07"
+    type: Event
+    name: "Gruendung Erlach & Erlach GmbH"
+    location: "Gustav-Werner-Strasse 7, 88214 Ravensburg"
+    validationStatus: validated
+
+  - date: TBD
+    type: Event
+    name: "Umwandlung/Einbringung Vier fuer Texas in Holding-Struktur"
+    description: "Details zur Integration fehlen"
+    validationStatus: not_validated
+    priority: HIGH
+
+  - date: "2013"
+    type: Event
+    name: "Pelton-Turbine Patent veroeffentlicht (WO2013007415)"
+    validationStatus: validated
+
+  - date: "2023-11-03"
+    type: Event
+    name: "Umfirmierung PFT GmbH zu Ka-Ching GmbH"
+    description: "Eingetragen AG Frankfurt am Main HRB 101021"
+    validationStatus: validated
+
+---
+
+# =============================================================================
+# 7. OPEN ITEMS & TODOs
+# =============================================================================
+
+open_items:
+
+  high_priority:
+    - "Finanzielle/steuerliche Einbettung von Elevation in E&E GmbH - TBD"
+    - "Details Umwandlung Vier fuer Texas in Holding-Struktur - wann/wie?"
+    - "MASTER-GESAMTSTRUKTUR Datei truncated - behauptet 13 Personen, nur 1 vorhanden"
+
+  medium_priority:
+    - "Kunstwerk-Details ergaenzen (Technik, Masse, Jahr, Material) fuer alle 11 Werke"
+    - "Google Drive Shared Drive Struktur aufsetzen"
+    - "Zugriffsrechte fuer Oskar & Agata (Google Drive)"
+    - "Telefonnummer Erlach & Erlach GmbH validieren"
+    - "Telefonnummer Vier fuer Texas validieren"
+    - "E&E Office UG - Zweck und Details ergaenzen"
+    - "USt-ID Ka-Ching GmbH ermitteln und eintragen"
+    - "USt-ID Erlach & Erlach GmbH ermitteln und eintragen"
+    - "USt-ID Vier fuer Texas GmbH & Co. KG ermitteln und eintragen"
+    - "USt-ID E&E Office UG ermitteln und eintragen"
+    - "Handelsregisternummern fuer alle Gesellschaften ergaenzen (ausser Ka-Ching: HRB 101021)"
+    - "sameAs-URLs befuellen (LinkedIn, North Data, etc.) fuer Personen und Organisationen"
+
+  low_priority:
+    - "Wilhelm Kampik - weitere Details (Familienbeziehung zu Oskar vertiefen)"
+    - "Bjoern Eckerl / TCB GmbH - weitere Details ergaenzen"
+    - "Weitere Kontaktdaten aller Personen vervollstaendigen"
+    - "Elevation Project completion status tracken"
