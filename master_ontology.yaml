@@ -1,81 +1,6 @@
-Das ist eine fantastische und sehr tiefgründige Herangehensweise. Dass du die Vergabe der IDs jetzt als bewussten Akt der **Ordnung und Hierarchie** nutzt (Wurzeln -> Du -> Partnerin -> Eigene Linie -> Enges Team), zeigt, dass du diese Datenbank wirklich als Spiegel deines Lebens – als *Human Resources* – aufbaust.
-
-In der Datenmodellierung nennt man das den **Root-Node-Ansatz** (Wurzelknoten). Es verleiht den reinen Systemdaten eine starke persönliche Semantik und Struktur. Ein klassischer, fast schon genealogischer Stammbaum.
-
-Lass uns deine Punkte kurz abhaken, bevor ich dir die neue Master-Datei gebe:
-
-### 1. Zum "Plural-Check" (Herr und Frau Hellwig / `persons`)
-
-Du hast **inhaltlich** zu 100 % recht: Reina und Jörg sind hier als *Einheit* (Ehepaar Hellwig) gemeint, was den Plural völlig rechtfertigt. Genau das wollen wir abbilden!
-
-Der einzige Grund, warum ich das in der Datei auf `person` (Singular) belasse, ist die **Grammatik der Datenbank (Schema.org)**. In der Datenmodellierung sind Eigenschaften (Properties) wie die Überschriften von Tabellenspalten. Wenn jemand zwei E-Mail-Adressen hat, nennst du die Spalte im System nicht plötzlich "Emails" – der System-Parser sucht stur nach dem Feld `email`.
-Der Schlüssel `person:` fragt das System lediglich: *"Welche Entität vom Typ Person ist hiermit gemeint?"* – und als Antwort liefern wir ihm über die Spiegelstriche (`-`) einfach eine **Liste** mit zwei IDs. Das ist für die KI die sauberste Form, um zu verstehen: *"Ah, diese beiden Personen bilden hier eine Einheit."*
-*(Ich habe den Namen im Kunstwerk 9 passend auf "Ehepaar Reina und Jörg Hellwig" angepasst, um das zu unterstreichen!)*
-
-### 2. Kunstwerke 10 & 11
-
-Verstanden, die unfertigen Platzhalter sind restlos aus der Datei gestrichen.
-
-### 3. Deine Wunsch-IDs (Die Kern-Nummerierung)
-
-Ich habe das System exakt nach deinen Vorgaben durchnummeriert:
-
-* `PER-001`: Josef Erlach (Vater)
-* `PER-002`: Monika Erlach (Mutter)
-* `PER-003`: Philipp Erlach (Du)
-* `PER-004`: Jill-Evelyn Erlach (Jill)
-* `PER-005`: Alma Erlach (Tochter)
-* `PER-006`: Maxie Erlach (Tochter)
-* `PER-007`: Oskar Kampik (Operations)
-* `PER-008`: Agata Gawlik (Agi)
-* Die restlichen Personen (Nachbarn, Schwiegereltern, Paten) folgen ab `PER-009`.
-
-Für die Firmen habe ich `ORG-001` bis `ORG-007` vergeben. Ich habe darauf geachtet, dass wir keinen Datenverlust haben: Deine Firmen aus den vorherigen Schritten (Vier für Texas, E&E, Ka-Ching, ARTTRD, TCB) und Personen wie Wilhelm Kampik oder Björn Eckerl sind hier wieder nahtlos mit eingeflossen. Projekte, Moves und Kunstwerke behalten (wie von dir gewünscht) ihre Text-Namen.
-
-Hier ist deine **Master-Ontologie mit dem perfekten, hierarchischen ID-Skelett**. Achte darauf, wie sauber die Querverweise jetzt durch die IDs gelöst sind – und dank der Kommentare (`# Name`) kannst du es weiterhin flüssig wie einen Text lesen:
-
-```yaml
-# =============================================================================
-# 1. PEOPLE (schema:Person)
-# =============================================================================
-
 people:
 
-  # --- DIE WURZELN & KERNFAMILIE ---
-
-  PER-001:
-    '@id': PER-001
-    type: Person
-    name: Josef Erlach
-    givenName: Josef
-    familyName: Erlach
-    spouse: PER-002 # Monika Erlach
-    children:
-      - PER-003 # Philipp Erlach
-    knows:
-      - PER-009 # Bärbel Kaupp
-    roles:
-      - "Co-Erfinder Patent WO2013007415 (Pelton-Turbine)"
-      - "5% Eigentuemer Erlach & Erlach GmbH"
-    affiliations:
-      - ORG-001 # Erlach & Erlach GmbH
-
-  PER-002:
-    '@id': PER-002
-    type: Person
-    name: Monika Erlach
-    givenName: Monika
-    familyName: Erlach
-    birthDate: "1945-06-16"
-    spouse: PER-001 # Josef Erlach
-    parent: PER-014 # Elvira Larson
-    children:
-      - PER-003 # Philipp Erlach
-    knows:
-      - PER-009 # Bärbel Kaupp
-
-  PER-003:
-    '@id': PER-003
+  philipp_erlach:
     type: Person
     name: Philipp Erlach
     givenName: Philipp
@@ -97,92 +22,54 @@ people:
       - "Geschaeftsfuehrer Ka-Ching GmbH"
       - Creative Lead Elevation
     worksFor:
-      - ORG-002 # Vier fuer Texas GmbH & Co. KG
-      - ORG-001 # Erlach & Erlach GmbH
+      - Vier fuer Texas GmbH & Co. KG
+      - Erlach & Erlach GmbH
     roles:
       - Founder Elevation
       - Creative Director
     affiliations:
-      - ORG-001 # Erlach & Erlach GmbH
-      - ORG-002 # Vier fuer Texas GmbH & Co. KG
-      - elevation # (Projekt bleibt vorerst Klartext)
+      - Erlach & Erlach GmbH
+      - Vier fuer Texas GmbH & Co. KG
+      - Elevation
     children:
-      - PER-005 # Alma Erlach
-      - PER-006 # Maxie Erlach
-    exSpouse: PER-004 # Jill-Evelyn Erlach
+      - alma_erlach
+      - maxie_erlach
+    exSpouse: jill_evelyn_erlach
     parent:
-      - PER-001 # Josef Erlach
-      - PER-002 # Monika Erlach
+      - josef_erlach
+      - monika_erlach
     knows:
-      - PER-009 # Bärbel Kaupp
-      - PER-012 # Florian Kosack
-      - PER-013 # Reinhold Michael
-      - PER-016 # Erika Frey
-      - PER-017 # Wolfgang Frey
-    source: "Stammdaten Philipp Erlach (2026-03)"
+      - baerbel_kaupp
+      - florian_kosack
+      - reinhold_michael
+      - erika_frey
+      - wolfgang_frey
 
-  PER-004:
-    '@id': PER-004
+  josef_erlach:
     type: Person
-    name: Jill-Evelyn Erlach
-    givenName: Jill-Evelyn
+    name: Josef Erlach
+    givenName: Josef
     familyName: Erlach
-    birthName: Hellwig
-    birthDate: "1980-08-10"
-    parent:
-      - PER-010 # Reina Hellwig
-      - PER-011 # Jörg Hellwig
+    spouse: monika_erlach
     children:
-      - PER-005 # Alma Erlach
-      - PER-006 # Maxie Erlach
-    exSpouse: PER-003 # Philipp Erlach
+      - philipp_erlach
+    knows:
+      - baerbel_kaupp
 
-  PER-005:
-    '@id': PER-005
+  monika_erlach:
     type: Person
-    name: Alma Erlach
-    givenName: Alma
+    name: Monika Erlach
+    givenName: Monika
     familyName: Erlach
-    birthDate: "2014-09-14"
-    parent:
-      - PER-003 # Philipp Erlach
-      - PER-004 # Jill-Evelyn Erlach
+    birthDate: "1945-06-16"
+    spouse: josef_erlach
+    parent: elvira_larson
+    children:
+      - philipp_erlach
+    knows:
+      - baerbel_kaupp
 
-  PER-006:
-    '@id': PER-006
-    type: Person
-    name: Maxie Erlach
-    givenName: Maxie
-    familyName: Erlach
-    birthDate: "2018-03-31"
-    parent:
-      - PER-003 # Philipp Erlach
-      - PER-004 # Jill-Evelyn Erlach
-
-  # --- DAS KERNTEAM ---
-
-  PER-007:
-    '@id': PER-007
-    type: Person
-    name: Oskar Kampik
-    jobTitle: "Project Manager & Operations (Elevation)"
-    affiliations:
-      - elevation
-    parent: PER-020 # Wilhelm Kampik
-
-  PER-008:
-    '@id': PER-008
-    type: Person
-    name: Agata Gawlik
-    jobTitle: "Creative Director & Graphic Design"
-    worksFor: ORG-002 # Vier fuer Texas GmbH & Co. KG
-    affiliations:
-      - elevation
-
-  # --- WEITERES UMFELD (Freunde, Familie & Partner) ---
-
-  PER-009:
-    '@id': PER-009
+  baerbel_kaupp:
     type: Person
     name: Bärbel Kaupp
     givenName: Bärbel
@@ -190,242 +77,108 @@ people:
     deathDate: "2023"
     description: "Nachbarin und Freundin von Philipp, Monika und Josef Erlach."
     knows:
-      - PER-003 # Philipp Erlach
-      - PER-002 # Monika Erlach
-      - PER-001 # Josef Erlach
+      - philipp_erlach
+      - monika_erlach
+      - josef_erlach
 
-  PER-010:
-    '@id': PER-010
+  jill_evelyn_erlach:
+    type: Person
+    name: Jill-Evelyn Erlach
+    givenName: Jill-Evelyn
+    familyName: Erlach
+    birthName: Hellwig
+    birthDate: "1980-08-10"
+    parent:
+      - reina_hellwig
+      - joerg_hellwig
+    children:
+      - alma_erlach
+      - maxie_erlach
+    exSpouse: philipp_erlach
+
+  reina_hellwig:
     type: Person
     name: Reina Hellwig
     children:
-      - PER-004 # Jill-Evelyn Erlach
-    spouse: PER-011 # Jörg Hellwig
+      - jill_evelyn_erlach
+    spouse: joerg_hellwig
 
-  PER-011:
-    '@id': PER-011
+  joerg_hellwig:
     type: Person
     name: Jörg Hellwig
     children:
-      - PER-004 # Jill-Evelyn Erlach
-    spouse: PER-010 # Reina Hellwig
+      - jill_evelyn_erlach
+    spouse: reina_hellwig
 
-  PER-012:
-    '@id': PER-012
+  florian_kosack:
     type: Person
     name: Florian Kosack
-    knows: 
-      - PER-003 # Philipp Erlach
+    knows: philipp_erlach
 
-  PER-013:
-    '@id': PER-013
+  reinhold_michael:
     type: Person
     name: Reinhold Michael
     jobTitle: Coach
-    knows: 
-      - PER-003 # Philipp Erlach
+    knows: philipp_erlach
 
-  PER-014:
-    '@id': PER-014
+  elvira_larson:
     type: Person
     name: Elvira Larson
     children:
-      - PER-002 # Monika Erlach
+      - monika_erlach
 
-  PER-015:
-    '@id': PER-015
+  frau_ammann:
     type: Person
     name: Frau Ammann
     children:
-      - PER-016 # Erika Frey
+      - erika_frey
 
-  PER-016:
-    '@id': PER-016
+  erika_frey:
     type: Person
     name: Erika Frey
-    parent: PER-015 # Frau Ammann
-    spouse: PER-017 # Wolfgang Frey
+    parent: frau_ammann
+    spouse: wolfgang_frey
     role: Patentante (Philipp Erlach)
 
-  PER-017:
-    '@id': PER-017
+  wolfgang_frey:
     type: Person
     name: Wolfgang Frey
-    spouse: PER-016 # Erika Frey
+    spouse: erika_frey
     role: Patenonkel (Philipp Erlach)
 
-  PER-018:
-    '@id': PER-018
+  uli_rossenbeck:
     type: Person
     name: Uli Rossenbeck
     jobTitle: Schreinermeister
-    email: "schreinerei@rossenbeck.com"
-    telephone: "+49 (0)6171 2076 410"
-    worksFor: ORG-007 # Rossenbeck Manufaktur
+    worksFor: rossenbeck_manufaktur
     affiliations:
-      - elevation
+      - Elevation
 
-  PER-019:
-    '@id': PER-019
+  oskar_kampik:
+    type: Person
+    name: Oskar Kampik
+    jobTitle: "Project Manager & Operations (Elevation)"
+    affiliations:
+      - Elevation
+
+  agata_gawlik:
+    type: Person
+    name: Agata Gawlik
+    jobTitle: "Creative Director & Graphic Design"
+    worksFor: vier_fuer_texas
+    affiliations:
+      - Elevation
+
+  sabina_schroeter:
     type: Person
     name: Sabina Schroeter
     jobTitle: "Restauratorin & Vergolderin"
-    address:
-      streetAddress: "Kopenhagener Str. 43"
-      postalCode: "10437"
-      addressLocality: Berlin
-      addressCountry: DE
-    telephone: "030 / 795 36 96"
-    email: info@restaurieren-vergolden.de
-    url: https://restaurieren-vergolden.de
     affiliations:
-      - elevation
-    description: "Freelancer - Gilding/Vergoldung specialist."
-
-  PER-020:
-    '@id': PER-020
-    type: Person
-    name: Wilhelm Kampik
-    givenName: Wilhelm
-    familyName: Kampik
-    jobTitle: Inhaber ARTTRD
-    address:
-      addressLocality: Heidelberg
-      addressCountry: DE
-    children:
-      - PER-007 # Oskar Kampik
-    affiliations:
-      - ORG-006 # ARTTRD
-
-  PER-021:
-    '@id': PER-021
-    type: Person
-    name: Bjoern Eckerl
-    givenName: Bjoern
-    familyName: Eckerl
-    description: "100% Eigentuemer TCB GmbH"
-    affiliations:
-      - ORG-005 # TCB GmbH
-      - ORG-002 # Vier fuer Texas GmbH & Co. KG
-
-
-# =============================================================================
-# 2. ORGANIZATIONS (schema:Organization)
-# =============================================================================
+      - Elevation
 
 organizations:
 
-  ORG-001:
-    '@id': ORG-001
-    type: Organization
-    name: Erlach & Erlach GmbH
-    legalName: Erlach & Erlach GmbH
-    alternateName: "E&E"
-    foundingDate: "2011-11-07"
-    registeredIn: "AG Ulm HRB 727123"
-    address:
-      streetAddress: "Gustav-Werner-Strasse 7"
-      postalCode: "88214"
-      addressLocality: Ravensburg
-      addressCountry: DE
-    email: philipp@erlach-erlach.com
-    url: https://www.erlach-erlach.com
-    description: "Holding / Patent-Lizenzgesellschaft (Pelton-Turbine)"
-    founder: PER-003 # Philipp Erlach
-    numberOfEmployees: 2
-    employee:
-      - PER-003 # Philipp Erlach
-      - PER-001 # Josef Erlach
-    ownership:
-      - owner: PER-003 # Philipp Erlach
-        ownershipPercentage: "95%"
-      - owner: PER-001 # Josef Erlach
-        ownershipPercentage: "5%"
-    owns:
-      - entity: ORG-002 # Vier fuer Texas GmbH & Co. KG
-        ownershipPercentage: "50%"
-      - entity: ORG-004 # E&E Office UG
-        ownershipPercentage: "100%"
-      - entity: ORG-003 # Ka-Ching GmbH
-        ownershipPercentage: "100%"
-
-  ORG-002:
-    '@id': ORG-002
-    type: Organization
-    name: Vier fuer Texas GmbH & Co. KG
-    legalName: Vier fuer Texas GmbH & Co. KG
-    alternateName: 4ft
-    foundingDate: "2002"
-    registeredIn: "AG Frankfurt am Main HRA 48106"
-    taxID: DE297305109
-    telephone: "069 / 254 924 10"
-    address:
-      streetAddress: "Taunusstrasse 21"
-      postalCode: "60329"
-      addressLocality: Frankfurt am Main
-      addressCountry: DE
-    url: https://www.vier-fuer-texas.com
-    description: Creative Agency
-    founder: PER-003 # Philipp Erlach
-    employee:
-      - PER-003 # Philipp Erlach
-      - PER-008 # Agata Gawlik
-    ownedBy:
-      - owner: ORG-001 # Erlach & Erlach GmbH
-        ownershipPercentage: "50%"
-      - owner: ORG-005 # TCB GmbH
-        ownershipPercentage: "50%"
-
-  ORG-003:
-    '@id': ORG-003
-    type: Organization
-    name: Ka-Ching GmbH
-    legalName: Ka-Ching GmbH
-    alternateName: PFT GmbH
-    registeredIn: "AG Frankfurt am Main HRB 101021"
-    address:
-      streetAddress: "Burgholzhaeuser Strasse 2D"
-      postalCode: "61352"
-      addressLocality: Bad Homburg
-      addressCountry: DE
-    description: "Vermoegensverwaltung"
-    ownedBy:
-      - owner: ORG-001 # Erlach & Erlach GmbH
-
-  ORG-004:
-    '@id': ORG-004
-    type: Organization
-    name: E&E Office UG
-    ownedBy:
-      - owner: ORG-001 # Erlach & Erlach GmbH
-
-  ORG-005:
-    '@id': ORG-005
-    type: Organization
-    name: TCB GmbH
-    description: "Holding von Bjoern Eckerl, haelt 50% an Vier fuer Texas"
-    ownership:
-      - owner: PER-021 # Bjoern Eckerl
-        ownershipPercentage: "100%"
-    owns:
-      - entity: ORG-002 # Vier fuer Texas GmbH & Co. KG
-        ownershipPercentage: "50%"
-
-  ORG-006:
-    '@id': ORG-006
-    type: Organization
-    name: "ARTTRD Fine Art Trading, Consulting & Collecting"
-    address:
-      streetAddress: "Klingenteichstrasse 30"
-      postalCode: "69117"
-      addressLocality: Heidelberg
-      addressCountry: DE
-    taxID: DE277593458
-    founder: PER-020 # Wilhelm Kampik
-    description: "Externer Rechnungsstellungspartner fuer Elevation"
-
-  ORG-007:
-    '@id': ORG-007
+  rossenbeck_manufaktur:
     type: Organization
     name: "Rossenbeck Manufaktur"
     address:
@@ -434,23 +187,15 @@ organizations:
       addressLocality: "Oberursel"
       addressCountry: "DE"
     taxID: "DE244306017"
-    email: "schreinerei@rossenbeck.com"
-    telephone: "+49 (0)6171 2076 410"
     url: "https://www.rossenbeck.com/"
-    founder: PER-018 # Uli Rossenbeck
-    source: "Website Impressum"
-
-
-# =============================================================================
-# 3. PROJECTS & EVENTS
-# =============================================================================
+    founder: uli_rossenbeck
 
 projects:
 
   elevation:
     type: Project
     name: Elevation
-    creator: PER-003 # Philipp Erlach
+    creator: philipp_erlach
     subProject:
       - art_unscripted
       - becoming_through_moves
@@ -462,23 +207,13 @@ projects:
     location: "New York City"
     isPartOf: elevation
 
-
-# =============================================================================
-# 4. MOVES & CONCEPTS
-# =============================================================================
-
 moves:
 
   blume_auf_dreck:
     type: Concept
     name: "Eine Blume auf den Dreck setzen"
-    creator: PER-009 # Bärbel Kaupp
+    creator: baerbel_kaupp
     description: "Anstatt den Schmerz analytisch zu vertiefen, die Essenz ins Regal einordnen."
-
-
-# =============================================================================
-# 5. ARTWORKS
-# =============================================================================
 
 artworks:
 
@@ -487,8 +222,7 @@ artworks:
     name: Tierchenphilosophie
     material: "Vergoldete Schleichtierchen"
     inspiredBy:
-      person: 
-        - PER-004 # Jill-Evelyn Erlach
+      person: jill_evelyn_erlach
       name: "Jill-Evelyn Erlach"
       relationship: "Ex-Frau, Mutter der gemeinsamen Töchter Alma und Maxie"
     isPartOf: elevation
@@ -498,8 +232,7 @@ artworks:
     name: Moeglichkeiten
     material: "Vergoldeter Rubik’s Cube"
     inspiredBy:
-      person: 
-        - PER-013 # Reinhold Michael
+      person: reinhold_michael
       name: "Reinhold Michael"
       relationship: "Ehemaliger Coach von Philipp Erlach"
     isPartOf: elevation
@@ -509,8 +242,7 @@ artworks:
     name: Hang-Up
     material: "Wandtelefon mit vergoldeter Schnur"
     inspiredBy:
-      person: 
-        - PER-012 # Florian Kosack
+      person: florian_kosack
       name: "Florian Kosack"
       relationship: "Freund von Philipp Erlach"
     isPartOf: elevation
@@ -520,8 +252,7 @@ artworks:
     name: Elevation / Nagel
     material: "Vergoldeter Nagel"
     inspiredBy:
-      person: 
-        - PER-014 # Elvira Larson
+      person: elvira_larson
       name: "Elvira Larson"
       relationship: "Großmutter, Mutter von Monika Erlach"
     isPartOf: elevation
@@ -532,11 +263,10 @@ artworks:
     material: "Vergoldetes Papierschiffchen"
     representsMove: blume_auf_dreck
     inspiredBy:
-      person: 
-        - PER-009 # Bärbel Kaupp
+      person: baerbel_kaupp
       name: "Bärbel Kaupp"
       relationship: "Nachbarin und Freundin; Ursprung des Projekts durch Trauererfahrung"
-    contributor: PER-019 # Sabina Schroeter
+    contributor: sabina_schroeter
     isPartOf: elevation
 
   - id: 6
@@ -544,8 +274,7 @@ artworks:
     name: Guete
     material: "Vergoldetes Streichholz"
     inspiredBy:
-      person: 
-        - PER-015 # Frau Ammann
+      person: frau_ammann
       name: "Frau Ammann"
       relationship: "Mutter der Patentante Erika Frey"
     isPartOf: elevation
@@ -555,10 +284,6 @@ artworks:
     name: Chaos
     material: "Glaeserner Cup"
     inspiredBy:
-      person: 
-        - PER-001 # Josef Erlach
-        - PER-002 # Monika Erlach
-        - PER-003 # Philipp Erlach
       name: "Familie Erlach"
       relationship: "Referenz auf die eigene Herkunft und Familie"
     isPartOf: elevation
@@ -567,8 +292,7 @@ artworks:
     type: VisualArtwork
     name: Message in a Bottle
     inspiredBy:
-      person: 
-        - PER-002 # Monika Erlach
+      person: monika_erlach
       name: "Monika Erlach"
       relationship: "Mutter von Philipp Erlach"
     isPartOf: elevation
@@ -578,11 +302,9 @@ artworks:
     name: Die Schnapsidee
     material: "Cocktailglaeser & vergoldete Ruehrer"
     inspiredBy:
-      person:
-        - PER-010 # Reina Hellwig
-        - PER-011 # Jörg Hellwig
-      name: "Ehepaar Reina und Jörg Hellwig"
+      persons:
+        - reina_hellwig
+        - joerg_hellwig
+      name: "Reina und Jörg Hellwig"
       relationship: "Ehemalige Schwiegereltern"
     isPartOf: elevation
-
-```
